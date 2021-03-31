@@ -3,5 +3,5 @@ import './styles.css';
 
 const nombre = 'Sebastian';
 
-saludar('Sebastian');
+saludar( nombre );
 
