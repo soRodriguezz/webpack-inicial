@@ -1,6 +1,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MinifyPlugin = require('babel-minify-webpack-plugin');
 
 const CopyPlugin = require('copy-webpack-plugin');
 
@@ -17,6 +18,13 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      },
       {
         test: /\.css$/,
         exclude: /styles\.css$/,
@@ -64,7 +72,8 @@ module.exports = {
       patterns: [
         { from: 'src/assets', to: 'assets/' }
       ]
-    })
+    }),
+    new MinifyPlugin()
   ]
     
 }
